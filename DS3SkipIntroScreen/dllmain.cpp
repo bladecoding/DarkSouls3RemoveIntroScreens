@@ -1,5 +1,6 @@
 #include <Windows.h>
 #include <MinHook.h>
+
 #pragma comment(lib, "libMinHook.x64.lib")
 
 struct Patch {
@@ -9,7 +10,7 @@ struct Patch {
     char orig[50];
 };
 
-typedef DWORD64(__cdecl *DIRECTINPUT8CREATE)(HINSTANCE, DWORD, REFIID, LPVOID *, LPUNKNOWN);
+typedef DWORD64(__stdcall *DIRECTINPUT8CREATE)(HINSTANCE, DWORD, REFIID, LPVOID *, LPUNKNOWN);
 DIRECTINPUT8CREATE fpDirectInput8Create;
 extern "C" __declspec(dllexport)  HRESULT __stdcall DirectInput8Create(
     HINSTANCE hinst,
@@ -21,12 +22,11 @@ extern "C" __declspec(dllexport)  HRESULT __stdcall DirectInput8Create(
 {
     return fpDirectInput8Create(hinst, dwVersion, riidltf, ppvOut, punkOuter);
 }
-
 typedef DWORD64(__cdecl *STEAMINIT)();
 STEAMINIT fpSteamInit = NULL;
 DWORD64 __cdecl onSteamInit() {
 
-    DWORD patchCount = 3;
+    DWORD patchCount = 4;
     Patch patches[] = {
         //v1.8
         Patch{ 0x0BD6ACF, 20, { static_cast<char>(0x48), static_cast<char>(0x31), static_cast<char>(0xC0), static_cast<char>(0x48), static_cast<char>(0x89), static_cast<char>(0x02), static_cast<char>(0x49), static_cast<char>(0x89), static_cast<char>(0x04), static_cast<char>(0x24), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90) },{ static_cast<char>(0xE8), static_cast<char>(0xAC), static_cast<char>(0xC6), static_cast<char>(0xFB), static_cast<char>(0xFF), static_cast<char>(0x90), static_cast<char>(0x4D), static_cast<char>(0x8B), static_cast<char>(0xC7), static_cast<char>(0x49), static_cast<char>(0x8B), static_cast<char>(0xD4), static_cast<char>(0x48), static_cast<char>(0x8B), static_cast<char>(0xC8), static_cast<char>(0xE8), static_cast<char>(0x9D), static_cast<char>(0xC6), static_cast<char>(0xFB), static_cast<char>(0xFF) } },
