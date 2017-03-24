@@ -26,12 +26,13 @@ typedef DWORD64(__cdecl *STEAMINIT)();
 STEAMINIT fpSteamInit = NULL;
 DWORD64 __cdecl onSteamInit() {
 
-    DWORD patchCount = 4;
     Patch patches[] = {
         //v1.8
         Patch{ 0x0BD6ACF, 20, { static_cast<char>(0x48), static_cast<char>(0x31), static_cast<char>(0xC0), static_cast<char>(0x48), static_cast<char>(0x89), static_cast<char>(0x02), static_cast<char>(0x49), static_cast<char>(0x89), static_cast<char>(0x04), static_cast<char>(0x24), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90) },{ static_cast<char>(0xE8), static_cast<char>(0xAC), static_cast<char>(0xC6), static_cast<char>(0xFB), static_cast<char>(0xFF), static_cast<char>(0x90), static_cast<char>(0x4D), static_cast<char>(0x8B), static_cast<char>(0xC7), static_cast<char>(0x49), static_cast<char>(0x8B), static_cast<char>(0xD4), static_cast<char>(0x48), static_cast<char>(0x8B), static_cast<char>(0xC8), static_cast<char>(0xE8), static_cast<char>(0x9D), static_cast<char>(0xC6), static_cast<char>(0xFB), static_cast<char>(0xFF) } },
         //v1.4
         Patch{ 0x0BBB0CF, 20, { static_cast<char>(0x48), static_cast<char>(0x31), static_cast<char>(0xC0), static_cast<char>(0x48), static_cast<char>(0x89), static_cast<char>(0x02), static_cast<char>(0x49), static_cast<char>(0x89), static_cast<char>(0x04), static_cast<char>(0x24), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90) },{ static_cast<char>(0xE8), static_cast<char>(0x8C), static_cast<char>(0x07), static_cast<char>(0xFC), static_cast<char>(0xFF), static_cast<char>(0x90), static_cast<char>(0x4D), static_cast<char>(0x8B), static_cast<char>(0xC7), static_cast<char>(0x49), static_cast<char>(0x8B), static_cast<char>(0xD4), static_cast<char>(0x48), static_cast<char>(0x8B), static_cast<char>(0xC8), static_cast<char>(0xE8), static_cast<char>(0x7D), static_cast<char>(0x07), static_cast<char>(0xFC), static_cast<char>(0xFF) } },
+        //v1.11
+        Patch{ 0x0BE6F8F, 20, { static_cast<char>(0x48), static_cast<char>(0x31), static_cast<char>(0xC0), static_cast<char>(0x48), static_cast<char>(0x89), static_cast<char>(0x02), static_cast<char>(0x49), static_cast<char>(0x89), static_cast<char>(0x04), static_cast<char>(0x24), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90) },{ static_cast<char>(0xE8), static_cast<char>(0x9C), static_cast<char>(0xBD), static_cast<char>(0xFB), static_cast<char>(0xFF), static_cast<char>(0x90), static_cast<char>(0x4D), static_cast<char>(0x8B), static_cast<char>(0xC7), static_cast<char>(0x49), static_cast<char>(0x8B), static_cast<char>(0xD4), static_cast<char>(0x48), static_cast<char>(0x8B), static_cast<char>(0xC8), static_cast<char>(0xE8), static_cast<char>(0x8D), static_cast<char>(0xBD), static_cast<char>(0xFB), static_cast<char>(0xFF) } },
         //v1.10
         Patch{ 0x0BD70FF, 20, { static_cast<char>(0x48), static_cast<char>(0x31), static_cast<char>(0xC0), static_cast<char>(0x48), static_cast<char>(0x89), static_cast<char>(0x02), static_cast<char>(0x49), static_cast<char>(0x89), static_cast<char>(0x04), static_cast<char>(0x24), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90) },{ static_cast<char>(0xE8), static_cast<char>(0xAC), static_cast<char>(0xC6), static_cast<char>(0xFB), static_cast<char>(0xFF), static_cast<char>(0x90), static_cast<char>(0x4D), static_cast<char>(0x8B), static_cast<char>(0xC7), static_cast<char>(0x49), static_cast<char>(0x8B), static_cast<char>(0xD4), static_cast<char>(0x48), static_cast<char>(0x8B), static_cast<char>(0xC8), static_cast<char>(0xE8), static_cast<char>(0x9D), static_cast<char>(0xC6), static_cast<char>(0xFB), static_cast<char>(0xFF) } },
         //v1.9
@@ -41,7 +42,7 @@ DWORD64 __cdecl onSteamInit() {
 
 
     auto baseAddr = GetModuleHandle(NULL);
-    for (auto i = 0; i < patchCount; i++) {
+    for (auto i = 0; i < (sizeof(patches) / sizeof(patches[0])); i++) {
         auto patch = patches[i];
         auto addr = (void*)((DWORD64)baseAddr + patch.relAddr);
         auto size = patch.size;
