@@ -8,6 +8,7 @@ These are the logos normally shown when first starting DS1.
 
 == Supported Versions ==
 v1.0.2.0
+debug version
 
 == Help ==
 
