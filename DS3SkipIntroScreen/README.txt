@@ -8,6 +8,11 @@ These are the logos normally shown when first starting DS3 and after saving and 
 
 
 == Supported Versions ==
+v1.15
+v1.14
+v1.13
+v1.12
+v1.11
 v1.10
 v1.09
 v1.08
@@ -20,3 +25,9 @@ A: Either the modified DINPUT8.dll is not in the correct directory or you are pl
 
 == Source ==
 https://github.com/bladecoding/DarkSouls3RemoveIntroScreens
+
+
+== Thanks ==
+
+https://github.com/hallcristobal - v1.13 patch
+https://github.com/pawREP - v1.14 patch
