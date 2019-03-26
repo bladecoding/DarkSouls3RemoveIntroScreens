@@ -17,3 +17,7 @@ A: Either the modified DINPUT8.dll is not in the correct directory or you are pl
 
 == Source ==
 https://github.com/bladecoding/DarkSouls3RemoveIntroScreens
+
+
+== Thanks ==
+https://github.com/pawREP - DS1 debug version patch
