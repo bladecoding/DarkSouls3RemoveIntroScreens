@@ -22,6 +22,7 @@ enum GAME {
 	DS1,
 	DS3,
 	SEKIRO,
+	ELDENRING,
 	UNKNOWN
 };
 
@@ -73,6 +74,9 @@ GAME DetermineGame() {
 	}
 	else if (fileName == "sekiro.exe") {
 		return GAME::SEKIRO;
+	}
+	else if (fileName == "eldenring.exe") {
+		return GAME::ELDENRING;
 	}
 	else {
 		return GAME::UNKNOWN;
@@ -151,8 +155,30 @@ void ApplySekiroPatches() {
 		Patch{ 0x0A78738, 36, { static_cast<char>(0x48), static_cast<char>(0x31), static_cast<char>(0xd2), static_cast<char>(0x48), static_cast<char>(0x89), static_cast<char>(0x55), static_cast<char>(0x67), static_cast<char>(0x48), static_cast<char>(0x89), static_cast<char>(0x55), static_cast<char>(0x7F), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90) },
 							  { static_cast<char>(0x48), static_cast<char>(0x8D), static_cast<char>(0x57), static_cast<char>(0x30), static_cast<char>(0x48), static_cast<char>(0x85), static_cast<char>(0xFF), static_cast<char>(0x48), static_cast<char>(0x0F), static_cast<char>(0x44), static_cast<char>(0xD6), static_cast<char>(0x48), static_cast<char>(0x8D), static_cast<char>(0x4D), static_cast<char>(0x7F), static_cast<char>(0xE8), static_cast<char>(0x34), static_cast<char>(0x3A), static_cast<char>(0x37), static_cast<char>(0x00), static_cast<char>(0x90), static_cast<char>(0x4C), static_cast<char>(0x8B), static_cast<char>(0xC3), static_cast<char>(0x48), static_cast<char>(0x8D), static_cast<char>(0x55), static_cast<char>(0x67), static_cast<char>(0x48), static_cast<char>(0x8B), static_cast<char>(0xC8), static_cast<char>(0xE8), static_cast<char>(0x04), static_cast<char>(0xD5), static_cast<char>(0x33), static_cast<char>(0x00) } },
 		Patch{ 0x0A7B675, 33, { static_cast<char>(0x48), static_cast<char>(0x31), static_cast<char>(0xd2), static_cast<char>(0x48), static_cast<char>(0x89), static_cast<char>(0x94), static_cast<char>(0x24), static_cast<char>(0x98), static_cast<char>(0x00), static_cast<char>(0x00), static_cast<char>(0x00), static_cast<char>(0x48), static_cast<char>(0x89), static_cast<char>(0x54), static_cast<char>(0x24), static_cast<char>(0x20), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90), static_cast<char>(0x90) },
-		                      { static_cast<char>(0x48), static_cast<char>(0x8B), static_cast<char>(0xD7), static_cast<char>(0x48), static_cast<char>(0x8D), static_cast<char>(0x4C), static_cast<char>(0x24), static_cast<char>(0x20), static_cast<char>(0xE8), static_cast<char>(0xFE), static_cast<char>(0x0A), static_cast<char>(0x37), static_cast<char>(0x00), static_cast<char>(0x90), static_cast<char>(0x4C), static_cast<char>(0x8B), static_cast<char>(0xC3), static_cast<char>(0x48), static_cast<char>(0x8D), static_cast<char>(0x94), static_cast<char>(0x24), static_cast<char>(0x98), static_cast<char>(0x00), static_cast<char>(0x00), static_cast<char>(0x00), static_cast<char>(0x48), static_cast<char>(0x8B), static_cast<char>(0xC8), static_cast<char>(0xE8), static_cast<char>(0xCA), static_cast<char>(0xA5), static_cast<char>(0x33), static_cast<char>(0x00) } },
+							  { static_cast<char>(0x48), static_cast<char>(0x8B), static_cast<char>(0xD7), static_cast<char>(0x48), static_cast<char>(0x8D), static_cast<char>(0x4C), static_cast<char>(0x24), static_cast<char>(0x20), static_cast<char>(0xE8), static_cast<char>(0xFE), static_cast<char>(0x0A), static_cast<char>(0x37), static_cast<char>(0x00), static_cast<char>(0x90), static_cast<char>(0x4C), static_cast<char>(0x8B), static_cast<char>(0xC3), static_cast<char>(0x48), static_cast<char>(0x8D), static_cast<char>(0x94), static_cast<char>(0x24), static_cast<char>(0x98), static_cast<char>(0x00), static_cast<char>(0x00), static_cast<char>(0x00), static_cast<char>(0x48), static_cast<char>(0x8B), static_cast<char>(0xC8), static_cast<char>(0xE8), static_cast<char>(0xCA), static_cast<char>(0xA5), static_cast<char>(0x33), static_cast<char>(0x00) } },
 
+	};
+
+	auto baseAddr = GetModuleHandle(NULL);
+	for (auto i = 0; i < (sizeof(patches) / sizeof(patches[0])); i++) {
+		auto patch = patches[i];
+		auto addr = (void*)((DWORD64)baseAddr + patch.relAddr);
+		auto size = patch.size;
+
+		if (memcmp(addr, patch.orig, size) == 0) {
+			DWORD old;
+			VirtualProtect(addr, size, PAGE_EXECUTE_READWRITE, &old);
+			memcpy(addr, patch.patch, size);
+			VirtualProtect(addr, size, old, &old);
+		}
+	}
+}
+
+void ApplyEldenRingPatches() {
+	Patch patches[] = {
+		//1.02.3
+		Patch{ 0xAAAF1A, 2, { static_cast<char>(0x90), static_cast<char>(0x90) },
+							{ static_cast<char>(0x74), static_cast<char>(0x53) } }
 	};
 
 	auto baseAddr = GetModuleHandle(NULL);
@@ -219,6 +245,9 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 		}
 		if (Game == GAME::DS1) {
 			ApplyDS1Patches();
+		}
+		if (Game == GAME::ELDENRING) {
+			ApplyEldenRingPatches();
 		}
 		break;
 	case DLL_THREAD_ATTACH:
