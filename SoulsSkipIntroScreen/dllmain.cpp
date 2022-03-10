@@ -75,7 +75,7 @@ GAME DetermineGame() {
 	else if (fileName == "sekiro.exe") {
 		return GAME::SEKIRO;
 	}
-	else if (fileName == "eldenring.exe") {
+	else if (fileName == "eldenring.exe" || fileName == "start_protected_game.exe") {
 		return GAME::ELDENRING;
 	}
 	else {
@@ -175,6 +175,7 @@ void ApplySekiroPatches() {
 }
 
 void ApplyEldenRingPatches() {
+	bool patch_applied = false;
 	Patch patches[] = {
 		//1.02.3
 		Patch{ 0xAAAF1A, 2, { static_cast<char>(0x90), static_cast<char>(0x90) },
@@ -192,7 +193,12 @@ void ApplyEldenRingPatches() {
 			VirtualProtect(addr, size, PAGE_EXECUTE_READWRITE, &old);
 			memcpy(addr, patch.patch, size);
 			VirtualProtect(addr, size, old, &old);
+			patch_applied = true;
 		}
+	}
+
+	if (!patch_applied) {
+		MessageBoxA(0, "Unable to apply patch to elden ring. You may be running an unsupported version.", "", 0);
 	}
 }
 
@@ -233,7 +239,7 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 	case DLL_PROCESS_ATTACH:
 		Game = DetermineGame();
 		if (Game == GAME::UNKNOWN) {
-			MessageBoxA(0, "Unable to determine game. Valid EXEs are darksouls.exe, darksoulsiii.exe and sekiro.exe", "", 0);
+			MessageBoxA(0, "Unable to determine game. Valid EXEs are darksouls.exe, darksoulsiii.exe, sekiro.exe, elden_ring.exe and start_protected_game.exe", "", 0);
 			break;
 		}
 
