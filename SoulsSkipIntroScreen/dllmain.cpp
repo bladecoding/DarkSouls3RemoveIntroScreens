@@ -179,6 +179,9 @@ void ApplyEldenRingPatches() {
 	Patch patches[] = {
 		//1.02.3
 		Patch{ 0xAAAF1A, 2, { static_cast<char>(0x90), static_cast<char>(0x90) },
+							{ static_cast<char>(0x74), static_cast<char>(0x53) } },
+		//1.03.0
+		Patch{ 0xAB021D, 2, { static_cast<char>(0x90), static_cast<char>(0x90) },
 							{ static_cast<char>(0x74), static_cast<char>(0x53) } }
 	};
 
