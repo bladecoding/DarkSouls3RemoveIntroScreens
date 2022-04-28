@@ -28,6 +28,11 @@ These are the logos normally shown when first starting Elden Ring and after savi
 
 ## Supported Versions
 1.02.3
+1.03
+1.03.1
+1.03.2
+1.04
+1.04.1
 
 ## Source
 https://github.com/bladecoding/DarkSouls3RemoveIntroScreens

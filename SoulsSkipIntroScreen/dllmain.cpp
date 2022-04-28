@@ -188,6 +188,12 @@ void ApplyEldenRingPatches() {
 							{ static_cast<char>(0x74), static_cast<char>(0x53) } },
 		// 1.03.2
 		Patch{ 0xAB020D, 2, { static_cast<char>(0x90), static_cast<char>(0x90) },
+							{ static_cast<char>(0x74), static_cast<char>(0x53) } },
+		// 1.04
+		Patch{ 0xA8FB6D, 2, { static_cast<char>(0x90), static_cast<char>(0x90) },
+							{ static_cast<char>(0x74), static_cast<char>(0x53) } },
+		// 1.04.1
+		Patch{ 0xA8FA7D, 2, { static_cast<char>(0x90), static_cast<char>(0x90) },
 							{ static_cast<char>(0x74), static_cast<char>(0x53) } }
 
 	};
