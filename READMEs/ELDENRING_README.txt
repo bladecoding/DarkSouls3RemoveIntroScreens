@@ -27,6 +27,9 @@ The No-Logo mod is a modification for Elden Ring that completely removes the int
 These are the logos normally shown when first starting Elden Ring and after saving and quitting the game, every time.
 
 ## Supported Versions
+1.02
+1.02.1
+1.02.2
 1.02.3
 1.03
 1.03.1

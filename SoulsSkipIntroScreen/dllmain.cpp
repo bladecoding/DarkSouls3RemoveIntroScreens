@@ -177,6 +177,15 @@ void ApplySekiroPatches() {
 void ApplyEldenRingPatches() {
 	bool patch_applied = false;
 	Patch patches[] = {
+		//1.02.0
+		Patch{ 0xAAAD4A, 2, { static_cast<char>(0x90), static_cast<char>(0x90) },
+							{ static_cast<char>(0x74), static_cast<char>(0x53) } },
+		//1.02.1
+		Patch{ 0xAAADCA, 2, { static_cast<char>(0x90), static_cast<char>(0x90) },
+							{ static_cast<char>(0x74), static_cast<char>(0x53) } },
+		//1.02.2
+		Patch{ 0xAAAE3A, 2, { static_cast<char>(0x90), static_cast<char>(0x90) },
+							{ static_cast<char>(0x74), static_cast<char>(0x53) } },
 		//1.02.3
 		Patch{ 0xAAAF1A, 2, { static_cast<char>(0x90), static_cast<char>(0x90) },
 							{ static_cast<char>(0x74), static_cast<char>(0x53) } },
