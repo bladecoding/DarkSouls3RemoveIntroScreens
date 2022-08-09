@@ -34,6 +34,7 @@ These are the logos normally shown when first starting Elden Ring and after savi
 1.04
 1.04.1
 1.05
+1.06
 
 ## Source
 https://github.com/bladecoding/DarkSouls3RemoveIntroScreens
