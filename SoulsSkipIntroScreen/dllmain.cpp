@@ -204,6 +204,9 @@ void ApplyEldenRingPatches() {
 		// 1.09
 		Patch{ 0xADDC8D, 2, { static_cast<char>(0x90), static_cast<char>(0x90) },
 							{ static_cast<char>(0x74), static_cast<char>(0x53) } },
+		// 1.09.1
+		Patch{ 0xADDCED, 2, { static_cast<char>(0x90), static_cast<char>(0x90) },
+							{ static_cast<char>(0x74), static_cast<char>(0x53) } },
 	};
 
 	auto baseAddr = GetModuleHandle(NULL);
