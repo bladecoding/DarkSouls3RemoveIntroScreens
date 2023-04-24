@@ -197,7 +197,16 @@ void ApplyEldenRingPatches() {
 							{ static_cast<char>(0x74), static_cast<char>(0x53) } },
 		// 1.05.0
 		Patch{ 0xA9417D, 2, { static_cast<char>(0x90), static_cast<char>(0x90) },
-							{ static_cast<char>(0x74), static_cast<char>(0x53) } }
+							{ static_cast<char>(0x74), static_cast<char>(0x53) } },
+		// 1.08.1
+		Patch{ 0xADB0FD, 2, { static_cast<char>(0x90), static_cast<char>(0x90) },
+							{ static_cast<char>(0x74), static_cast<char>(0x53) } },
+		// 1.09
+		Patch{ 0xADDC8D, 2, { static_cast<char>(0x90), static_cast<char>(0x90) },
+							{ static_cast<char>(0x74), static_cast<char>(0x53) } },
+		// 1.09.1
+		Patch{ 0xADDCED, 2, { static_cast<char>(0x90), static_cast<char>(0x90) },
+							{ static_cast<char>(0x74), static_cast<char>(0x53) } },
 	};
 
 	auto baseAddr = GetModuleHandle(NULL);
