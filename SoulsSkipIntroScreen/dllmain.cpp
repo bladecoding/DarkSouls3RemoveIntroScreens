@@ -176,6 +176,7 @@ void ApplySekiroPatches() {
 
 void ApplyEldenRingPatches() {
 	bool patch_applied = false;
+	// https://github.com/techiew/EldenRingMods/blob/9dde795c50072f9d2e3db7131684fae3848a3eec/SkipTheIntro/documentation.txt
 	Patch patches[] = {
 		//1.02.3
 		Patch{ 0xAAAF1A, 2, { static_cast<char>(0x90), static_cast<char>(0x90) },
@@ -197,7 +198,17 @@ void ApplyEldenRingPatches() {
 							{ static_cast<char>(0x74), static_cast<char>(0x53) } },
 		// 1.05.0
 		Patch{ 0xA9417D, 2, { static_cast<char>(0x90), static_cast<char>(0x90) },
-							{ static_cast<char>(0x74), static_cast<char>(0x53) } }
+							{ static_cast<char>(0x74), static_cast<char>(0x53) } },
+		// 1.09.1
+		Patch{ 0xADDCED, 2, { static_cast<char>(0x90), static_cast<char>(0x90) },
+							{ static_cast<char>(0x74), static_cast<char>(0x53) } },
+		// 1.10.1
+		Patch{ 0xADDF7D, 2, { static_cast<char>(0x90), static_cast<char>(0x90) },
+							{ static_cast<char>(0x74), static_cast<char>(0x53) } },
+
+		// 1.12.1
+		Patch{ 0xB0BD7D, 2, { static_cast<char>(0x90), static_cast<char>(0x90) },
+							{ static_cast<char>(0x74), static_cast<char>(0x53) } },
 	};
 
 	auto baseAddr = GetModuleHandle(NULL);
